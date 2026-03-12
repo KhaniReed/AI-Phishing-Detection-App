@@ -22,6 +22,12 @@
 - Persist artifacts (`tfidf_vectorizer`, `scaler`, `email_model`, `url_model`) with `joblib`.
 - On app startup, only load serialized artifacts; never retrain in web workers.
 
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **Evidently AI / FSDL model monitoring & MLOps talks**  
+  https://www.youtube.com/results?search_query=evidently+ai+model+monitoring
+
 ### 2) Fix data leakage in model evaluation (highest impact)
 **Current state**
 - SMOTE oversampling runs *before* train/test split for both email and URL datasets.
@@ -35,6 +41,14 @@
 - Prefer `imblearn.pipeline.Pipeline` + cross-validation for robust evaluation.
 - Track precision, recall, F1, and PR-AUC (not just accuracy).
 
+**Learning resources mapped to this improvement**
+- Article: **Lipton et al. (2014), _Thresholding Classifiers to Maximize F1 Score_**  
+  https://arxiv.org/abs/1402.1892
+- Article: **Sahingoz et al. (2019), _Machine Learning Based Phishing Detection from URLs_**  
+  https://www.sciencedirect.com/science/article/pii/S0957417419302433
+- Video: **StatQuest confusion matrix, ROC-AUC, precision/recall deep dives**  
+  https://www.youtube.com/results?search_query=statquest+roc+auc+precision+recall
+
 ### 3) Avoid dense TF-IDF conversion for email text
 **Current state**
 - Sparse TF-IDF matrix is converted to dense with `.toarray()`.
@@ -46,6 +60,12 @@
 **Recommendation**
 - Keep sparse matrices when possible.
 - If classifier requires dense input, reduce feature size and compare alternatives (`LinearSVC`, `LogisticRegression`, `SGDClassifier`) that are strong and efficient on sparse text.
+
+**Learning resources mapped to this improvement**
+- Article: **Sahingoz et al. (2019), _Machine Learning Based Phishing Detection from URLs_**  
+  https://www.sciencedirect.com/science/article/pii/S0957417419302433
+- Video: **Kaggle feature engineering tutorials**  
+  https://www.youtube.com/results?search_query=kaggle+feature+engineering+tutorial
 
 ### 4) Improve URL/email type routing logic
 **Current state**
@@ -60,6 +80,14 @@
 - Add fallback logic for mixed text containing URLs.
 - Consider a lightweight first-stage classifier to detect input type.
 
+**Learning resources mapped to this improvement**
+- Article: **Bahnsen et al. (2017), _Classifying Phishing URLs Using Recurrent Neural Networks_**  
+  https://arxiv.org/abs/1708.08579
+- Article: **Mao et al. (2018), _Phishing Page Detection via Learning Classifiers from Page Layout Feature_**  
+  https://jis-eurasipjournals.springeropen.com/articles/10.1186/s13635-018-0076-0
+- Video: **DeepLearning.AI sequence model overviews**  
+  https://www.youtube.com/results?search_query=deeplearningai+nlp+sequence+models
+
 ### 5) Calibrate thresholds and return confidence
 **Current state**
 - Output is hard label only: "Phishing" / "Legitimate".
@@ -71,6 +99,16 @@
 **Recommendation**
 - Use `predict_proba`; tune threshold by use-case.
 - Display confidence + key feature explanations (e.g., top tokens/features) for trust.
+
+**Learning resources mapped to this improvement**
+- Article: **Lipton et al. (2014), _Thresholding Classifiers to Maximize F1 Score_**  
+  https://arxiv.org/abs/1402.1892
+- Article: **Ribeiro et al. (2016), _Why Should I Trust You?_ (LIME)**  
+  https://arxiv.org/abs/1602.04938
+- Video: **LIME explainable AI tutorials**  
+  https://www.youtube.com/results?search_query=lime+explainable+ai+tutorial
+- Video: **SHAP explainability tutorials**  
+  https://www.youtube.com/results?search_query=shap+model+explainability+tutorial
 
 ### 6) Add proper test coverage and regression checks
 **Current state**
@@ -86,6 +124,12 @@
   - `predict_phishing` smoke tests with known examples.
 - Add an offline evaluation script that logs metrics to file for each model version.
 
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **StatQuest model evaluation series**  
+  https://www.youtube.com/results?search_query=statquest+roc+auc+precision+recall
+
 ### 7) Remove dead imports and metrics code, tighten model experimentation loop
 **Current state**
 - `RandomForestClassifier`, `classification_report`, and `numpy` are imported but not used.
@@ -99,6 +143,12 @@
 - Keep training/evaluation code in dedicated module.
 - Keep runtime inference module minimal and deterministic.
 
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **MLOps architecture talks (FSDL/Evidently AI)**  
+  https://www.youtube.com/results?search_query=evidently+ai+model+monitoring
+
 ### 8) Improve deployment/security configuration for production correctness
 **Current state**
 - `DEBUG=True` and hard-coded secret key in settings.
@@ -110,6 +160,14 @@
 - Use environment variables for `SECRET_KEY`, `DEBUG`, allowed hosts.
 - Add structured logging around inference latency and prediction distribution.
 
+**Learning resources mapped to this improvement**
+- Article: **Barreno et al. (2010), _The Security of Machine Learning_**  
+  https://link.springer.com/article/10.1007/s10994-010-5188-5
+- Article: **Biggio & Roli (2018), _Wild Patterns_**  
+  https://arxiv.org/abs/1712.03141
+- Video: **OWASP phishing defense talks**  
+  https://www.youtube.com/results?search_query=owasp+phishing+defense
+
 ### 9) Normalize dependency file encoding
 **Current state**
 - `setup.txt` appears UTF-16-encoded with null bytes.
@@ -119,6 +177,12 @@
 
 **Recommendation**
 - Convert to UTF-8 and consider renaming to `requirements.txt`.
+
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **Python packaging/dependency management tutorials**  
+  https://www.youtube.com/results?search_query=python+requirements+txt+best+practices
 
 ## Suggested 2-week implementation plan
 
