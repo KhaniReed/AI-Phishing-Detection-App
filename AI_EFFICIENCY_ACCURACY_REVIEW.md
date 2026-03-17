@@ -22,6 +22,7 @@
 - Persist artifacts (`tfidf_vectorizer`, `scaler`, `email_model`, `url_model`) with `joblib`.
 - On app startup, only load serialized artifacts; never retrain in web workers.
 
+
 **Articles & videos to implement this**
 - Article: Django custom management commands (official docs)  
   https://docs.djangoproject.com/en/stable/howto/custom-management-commands/
@@ -31,6 +32,13 @@
   https://www.youtube.com/results?search_query=django+custom+management+command+tutorial
 - Video: Save/load ML models with joblib  
   https://www.youtube.com/results?search_query=joblib+save+load+sklearn+model
+
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **Evidently AI / FSDL model monitoring & MLOps talks**  
+  https://www.youtube.com/results?search_query=evidently+ai+model+monitoring
+
 
 ### 2) Fix data leakage in model evaluation (highest impact)
 **Current state**
@@ -57,6 +65,14 @@
 - Video: Precision/Recall and PR-AUC explained (StatQuest)  
   https://www.youtube.com/results?search_query=statquest+precision+recall+pr+auc
 
+**Learning resources mapped to this improvement**
+- Article: **Lipton et al. (2014), _Thresholding Classifiers to Maximize F1 Score_**  
+  https://arxiv.org/abs/1402.1892
+- Article: **Sahingoz et al. (2019), _Machine Learning Based Phishing Detection from URLs_**  
+  https://www.sciencedirect.com/science/article/pii/S0957417419302433
+- Video: **StatQuest confusion matrix, ROC-AUC, precision/recall deep dives**  
+  https://www.youtube.com/results?search_query=statquest+roc+auc+precision+recall
+
 ### 3) Avoid dense TF-IDF conversion for email text
 **Current state**
 - Sparse TF-IDF matrix is converted to dense with `.toarray()`.
@@ -80,6 +96,12 @@
   https://www.youtube.com/results?search_query=tfidf+scikit+learn+sparse+matrix+tutorial
 - Video: Logistic Regression / Linear SVM for text classification  
   https://www.youtube.com/results?search_query=linear+svm+logistic+regression+text+classification+sklearn
+
+**Learning resources mapped to this improvement**
+- Article: **Sahingoz et al. (2019), _Machine Learning Based Phishing Detection from URLs_**  
+  https://www.sciencedirect.com/science/article/pii/S0957417419302433
+- Video: **Kaggle feature engineering tutorials**  
+  https://www.youtube.com/results?search_query=kaggle+feature+engineering+tutorial
 
 ### 4) Improve URL/email type routing logic
 **Current state**
@@ -106,6 +128,14 @@
 - Video: Building robust URL validators in Python  
   https://www.youtube.com/results?search_query=python+url+validation+tutorial
 
+**Learning resources mapped to this improvement**
+- Article: **Bahnsen et al. (2017), _Classifying Phishing URLs Using Recurrent Neural Networks_**  
+  https://arxiv.org/abs/1708.08579
+- Article: **Mao et al. (2018), _Phishing Page Detection via Learning Classifiers from Page Layout Feature_**  
+  https://jis-eurasipjournals.springeropen.com/articles/10.1186/s13635-018-0076-0
+- Video: **DeepLearning.AI sequence model overviews**  
+  https://www.youtube.com/results?search_query=deeplearningai+nlp+sequence+models
+
 ### 5) Calibrate thresholds and return confidence
 **Current state**
 - Output is hard label only: "Phishing" / "Legitimate".
@@ -129,6 +159,16 @@
   https://www.youtube.com/results?search_query=classification+threshold+precision+recall+tutorial
 - Video: SHAP explainability tutorial in Python  
   https://www.youtube.com/results?search_query=shap+python+tutorial
+
+**Learning resources mapped to this improvement**
+- Article: **Lipton et al. (2014), _Thresholding Classifiers to Maximize F1 Score_**  
+  https://arxiv.org/abs/1402.1892
+- Article: **Ribeiro et al. (2016), _Why Should I Trust You?_ (LIME)**  
+  https://arxiv.org/abs/1602.04938
+- Video: **LIME explainable AI tutorials**  
+  https://www.youtube.com/results?search_query=lime+explainable+ai+tutorial
+- Video: **SHAP explainability tutorials**  
+  https://www.youtube.com/results?search_query=shap+model+explainability+tutorial
 
 ### 6) Add proper test coverage and regression checks
 **Current state**
@@ -156,6 +196,12 @@
 - Video: pytest parametrized tests tutorial  
   https://www.youtube.com/results?search_query=pytest+parametrize+tutorial
 
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **StatQuest model evaluation series**  
+  https://www.youtube.com/results?search_query=statquest+roc+auc+precision+recall
+
 ### 7) Remove dead imports and metrics code, tighten model experimentation loop
 **Current state**
 - `RandomForestClassifier`, `classification_report`, and `numpy` are imported but not used.
@@ -178,6 +224,12 @@
   https://www.youtube.com/results?search_query=ml+project+structure+training+inference+separation
 - Video: Ruff + Python linting setup  
   https://www.youtube.com/results?search_query=ruff+python+tutorial
+
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **MLOps architecture talks (FSDL/Evidently AI)**  
+  https://www.youtube.com/results?search_query=evidently+ai+model+monitoring
 
 ### 8) Improve deployment/security configuration for production correctness
 **Current state**
@@ -202,6 +254,14 @@
 - Video: Structured logging in Python applications  
   https://www.youtube.com/results?search_query=python+structured+logging+tutorial
 
+**Learning resources mapped to this improvement**
+- Article: **Barreno et al. (2010), _The Security of Machine Learning_**  
+  https://link.springer.com/article/10.1007/s10994-010-5188-5
+- Article: **Biggio & Roli (2018), _Wild Patterns_**  
+  https://arxiv.org/abs/1712.03141
+- Video: **OWASP phishing defense talks**  
+  https://www.youtube.com/results?search_query=owasp+phishing+defense
+
 ### 9) Normalize dependency file encoding
 **Current state**
 - `setup.txt` appears UTF-16-encoded with null bytes.
@@ -221,6 +281,12 @@
   https://www.youtube.com/results?search_query=requirements+txt+best+practices+python
 - Video: handling file encoding in Python/VS Code  
   https://www.youtube.com/results?search_query=convert+file+encoding+utf-8+vscode
+
+**Learning resources mapped to this improvement**
+- Article: **Sculley et al. (2015), _Hidden Technical Debt in Machine Learning Systems_**  
+  https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+- Video: **Python packaging/dependency management tutorials**  
+  https://www.youtube.com/results?search_query=python+requirements+txt+best+practices
 
 ## Suggested 2-week implementation plan
 
